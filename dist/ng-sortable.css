@@ -7,8 +7,8 @@
 }
 
 .as-sortable-item {
-    -ms-touch-action: none;
-    touch-action: none;
+    -ms-touch-action: auto;
+    touch-action: auto;
 }
 
 .as-sortable-item-handle {
