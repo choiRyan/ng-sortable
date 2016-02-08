@@ -665,6 +665,8 @@
            * @param event - the event object.
            */
           dragListen = function (event) {
+            
+            scope.lastDown = +new Date();
 
             var unbindMoveListen = function () {
               angular.element($document).unbind('mousemove', moveListen);
@@ -682,8 +684,14 @@
                 startPosition = { clientX: eventObj.clientX, clientY: eventObj.clientY };
               }
               if (Math.abs(eventObj.clientX - startPosition.clientX) + Math.abs(eventObj.clientY - startPosition.clientY) > 10) {
-                unbindMoveListen();
-                dragStart(event);
+                var newTime = +new Date();
+                if(scope.lastDown && newTime - scope.lastDown > 200){
+                  scope.lastDown = null;
+                  unbindMoveListen();
+                  dragStart(event);
+                }else{
+                  unbindMoveListen();
+                }
               }
             };
 
